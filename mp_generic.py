@@ -41,7 +41,7 @@ def mp_groupby(df_in, gb_cols, gb_func, *gb_func_args, **mp_args):
     :param gb_func: function to apply on the group_by
     :param gb_func_args: gb_func args
     mp_args
-    :param n_cpus: number of CPUs to use. If 0 do not use multiprocessing.
+    :param n_cpus: number of CPUs to use. If 0 do not use multiprocessing. If -1, it will use the maximum number of cpus on the machine.
     :param n_queues: Number of queues with tasks. If n_queues != 1, it is set to n_cpus. Default is 1.
     :return: Same as non-multiprocessing group_by.
 
@@ -55,6 +55,8 @@ def mp_groupby(df_in, gb_cols, gb_func, *gb_func_args, **mp_args):
     n_cpus = n_cpus_input(**mp_args)
     if n_cpus == 0:    # run without multiprocessing
         return df_in.groupby(gb_cols).apply(gb_func, *gb_func_args)
+    elif n_cpus == -1:              # Use max number of CPUs on the machine
+        n_cpus = mp.cpu_count()
     else:              # keep proposed value but ensure it is not above the available CPUs
         n_cpus = min(n_cpus, mp.cpu_count())
     qs = mp_args['n_queues'] if 'n_queues' in mp_args else 1
@@ -100,7 +102,7 @@ def df_grouper(df, gb_cols, n_groups):
     # prepare the index dict to iterate
     idx_dict = dict()
     if len(gb_cols) > 0:                                          # traditional group_by + apply
-        srt_df = df.sort(columns=gb_cols).reset_index(drop=True)  # sorting by gb cols makes the index continuous in each group! All we have to do is identify group boundaries!
+        srt_df = df.sort_values(by=gb_cols).reset_index(drop=True)  # sorting by gb cols makes the index continuous in each group! All we have to do is identify group boundaries!
         g = srt_df.groupby(gb_cols)
         idx_dict = {np.min(v): len(v) for v in g.indices.values()}
     else:                                                         # plain apply (to rows?)
