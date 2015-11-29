@@ -34,9 +34,9 @@ from operator import itemgetter
 import sys
 
 
-def mp_groupby(df_in, gb_cols, gb_func, *gb_func_args, **mp_args):
+def mp_groupby(df_in, gb_cols, mp_args, gb_func, *gb_func_args, **gb_func_kargs):
     """
-    MP implementation of df_out = df_in.groupby(gb_cols).apply(gb_func, gb_func_args)
+    MP implementation of df_out = df_in.groupby(gb_cols).apply(gb_func, gb_func_args, gp_func_kargs)
     :param gb_cols: list of group_by cols
     :param gb_func: function to apply on the group_by
     :param gb_func_args: gb_func args
@@ -54,7 +54,7 @@ def mp_groupby(df_in, gb_cols, gb_func, *gb_func_args, **mp_args):
     # number of CPUs
     n_cpus = n_cpus_input(**mp_args)
     if n_cpus == 0:    # run without multiprocessing
-        return df_in.groupby(gb_cols).apply(gb_func, *gb_func_args)
+        return df_in.groupby(gb_cols).apply(gb_func, *gb_func_args, **gp_func_kargs)
     elif n_cpus == -1:              # Use max number of CPUs on the machine
         n_cpus = mp.cpu_count()
     else:              # keep proposed value but ensure it is not above the available CPUs
@@ -70,7 +70,7 @@ def mp_groupby(df_in, gb_cols, gb_func, *gb_func_args, **mp_args):
 
     gb_func_args += (df_in, )                                           # append df_in to func args
     mp_func_by_groups = simple_parallel(func_by_groups, n_cpus)         # a general template that groups a function used in a pd groupby
-    result = mp_func_by_groups(df_groups.keys(), df_groups, gb_func, *gb_func_args)
+    result = mp_func_by_groups(df_groups.keys(), df_groups, gb_func, *gb_func_args, **gp_func_kargs)
     if len(result) > 0:
         return pd.concat(result)
     else:
@@ -119,7 +119,7 @@ def df_grouper(df, gb_cols, n_groups):
     return df_grp
 
 
-def func_by_groups(key, group_dict, func, *args):
+def func_by_groups(key, group_dict, func, *args, **kargs):
     """
     Implements the group_by version of function func
     :param key: group key
@@ -134,7 +134,7 @@ def func_by_groups(key, group_dict, func, *args):
     args = args[:-1]                          # create a new args dropping the df
     d_list = []
     for df_start, df_len in group_dict[key]:
-        d = func(df.iloc[df_start:(df_start + df_len)], *args)
+        d = func(df.iloc[df_start:(df_start + df_len)], *args, **kargs)
         if len(d) > 0:
             d_list.append(d)
     if len(d_list) > 0:
