@@ -100,7 +100,7 @@ def df_grouper(df, gb_cols, n_groups):
     # prepare the index dict to iterate
     idx_dict = dict()
     if len(gb_cols) > 0:                                          # traditional group_by + apply
-        srt_df = df.sort(columns=gb_cols).reset_index(drop=True)  # sorting by gb cols makes the index continuous in each group! All we have to do is identify group boundaries!
+        srt_df = df.sort_values(by=gb_cols).reset_index(drop=True)  # sorting by gb cols makes the index continuous in each group! All we have to do is identify group boundaries!
         g = srt_df.groupby(gb_cols)
         idx_dict = {np.min(v): len(v) for v in g.indices.values()}
     else:                                                         # plain apply (to rows?)

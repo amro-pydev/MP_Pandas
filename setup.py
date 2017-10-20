@@ -1,4 +1,9 @@
+
+import os
 from setuptools import setup
+
+with open('requirements.txt') as f:
+    required = f.read().splitlines()
 
 setup(
     name='MP_Pandas',
@@ -12,6 +17,7 @@ setup(
     description='Pandas Multiprocessing Support',
     long_description='Python Multiprocesing Support',
     packages=['MP_Pandas'],
+    install_requires=required,
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
