@@ -6,9 +6,11 @@ Python package that supports multiprocessing apply command on pandas dataframe. 
 Installation:
 =============
 To install from source:
+
      git clone https://github.com/amro-pydev/MP_Pandas.git
 
 Then run install command:
+
      python setup.py install
 
 
