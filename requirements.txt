@@ -1,0 +1,3 @@
+multiprocessing
+numpy
+pandas>=0.17.1
