@@ -1,6 +1,12 @@
 MP_Pandas
 =========
 
+Python package that supports multiprocessing apply command on pandas dataframe. Very helpful for large massive dataframes.
+
+Installation:
+=============
+
+
 Pandas' group-by/apply with multiprocessing
 ===========================================
 
