@@ -18,14 +18,14 @@ Pandas' group-by/apply with multiprocessing
 ===========================================
 
 Original syntax for apply or groupby/apply:
-'''python
+```python
 data_frame.groupby(column_list).apply(apply_func, *args, **kwargs)
-'''
+```
 
 You could multiprocess this apply command by using our package:
-'''python
+```python
 import pandas_multiprocessing as pdmp
 pdmp.mp_groupby(data_frame, column_list, apply_func, *args, **kwargs)
-'''
+```
 
 The arguments to mp_groupby() are the same as in the Pandas groupby/apply except for the additional mp_arg argument, which contains multiprocessing information such as the number of CPUs to use and load balancing information.
