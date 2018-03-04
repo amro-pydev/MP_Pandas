@@ -1,4 +1,4 @@
-MP_Pandas
+pandas_multiprocessing
 =========
 
 Python package that supports multiprocessing apply command on pandas dataframe. Very helpful for large massive dataframes.
@@ -7,7 +7,7 @@ Installation:
 =============
 To install from source:
 
-     git clone https://github.com/amro-pydev/MP_Pandas.git
+     git clone https://github.com/amro-pydev/pandas_multiprocessing.git
 
 Then run install command:
 
