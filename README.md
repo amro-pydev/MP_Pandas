@@ -14,7 +14,7 @@ Then run install command:
      python setup.py install
 
 
-Pandas' group-by/apply with multiprocessing
+Multiprocessing groupby/apply:
 ===========================================
 
 Original syntax for apply or groupby/apply:
