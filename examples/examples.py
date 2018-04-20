@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import sys
 import os
-import MP_Pandas as mp
+import pandas_multiprocessing as mp
 from datetime import datetime
 import time
 
