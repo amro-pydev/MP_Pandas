@@ -5,14 +5,15 @@ Python package that supports multiprocessing apply command on pandas dataframe. 
 
 Installation:
 =============
+To install from Pypi:
+
+     pip install pandas_multiprocessing
+     
 To install from source:
 
      git clone https://github.com/amro-pydev/pandas_multiprocessing.git
-
-Then run install command:
-
+     cd pandas_multiprocessing
      python setup.py install
-
 
 Multiprocessing groupby/apply:
 ===========================================
