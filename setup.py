@@ -16,7 +16,7 @@ setup(
     license="BSD",
     description='Pandas Multiprocessing Support',
     long_description='Python Multiprocesing Support',
-    packages=['MP_Pandas'],
+    packages=['pandas_multiprocessing'],
     install_requires=required,
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
