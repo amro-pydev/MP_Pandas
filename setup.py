@@ -6,13 +6,13 @@ with open('requirements.txt') as f:
     required = f.read().splitlines()
 
 setup(
-    name='MP_Pandas',
+    name='pandas_multiprocessing',
     version='0.1',
     author='josepm,amro-pydev',
     author_email='amrsfmt@yahoo.com',
     maintainer='Amro Tork',
     maintainer_email='amrsfmt@yahoo.com',
-    url='https://github.com/amro-pydev/MP_Pandas.git',
+    url='https://github.com/amro-pydev/pandas_multiprocessing.git',
     license="BSD",
     description='Pandas Multiprocessing Support',
     long_description='Python Multiprocesing Support',
