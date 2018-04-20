@@ -77,13 +77,13 @@ def mp_groupby(df_in, gb_cols, gb_func, *gb_func_args, **mp_args):
 
 def n_cpus_input(**mp_args):
     if 'n_cpus' not in mp_args:
-        'Missing number of CPUs'
+        print('Missing number of CPUs')
         sys.exit(0)
     else:
         n_cpus = mp_args['n_cpus']
 
     if isinstance(n_cpus, int) is False:
-        print 'invalid number of CPUs: ' + str(n_cpus)
+        print('invalid number of CPUs: {:d}'.format(n_cpus))
         sys.exit(0)
     return n_cpus
 
